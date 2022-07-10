@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { getLocations } from './db.js';
+import { getLocations, updateLocation } from './db.js';
 
 const app = express();
 
@@ -11,7 +11,17 @@ app.get('/locations', async (req, res) => {
     try {
         const dbResults = await getLocations();
 
-        res.json(dbResults.rows);
+        res.status(200).json(dbResults.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.put('/locations', async (req, res) => {
+    try {
+        await updateLocation(req.body);
+
+        res.status(200).send();
     } catch (error) {
         console.log(error);
     }
