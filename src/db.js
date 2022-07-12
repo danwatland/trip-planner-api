@@ -13,7 +13,7 @@ const getLocations = async () => {
             startdate as "startDate",
             enddate as "endDate"
         FROM public.locations
-        ORDER BY id ASC
+        ORDER BY startdate ASC
     `);
     await client.end();
 
